@@ -1,5 +1,6 @@
 import pandas as pd
 import datetime as dt
+from datetime import datetime
 
 
 ACTUAL_TIME = dt.datetime(2021, 5, 6, 15, 0, 0)
@@ -22,17 +23,17 @@ def is_open(site):
 
 for i in data_time.values:
     if(is_open(i[2])):
-        if(dt.datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S") > ACTUAL_TIME + dt(days=2)):
-            print("Sensor {sensor name} with identifier {identifier} triggers an\ "
-                  "alert at {alert datetime} with level {alert level} with last "
-                  "data recorded at {last record datetime}")
-        elif(dt.datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S") > ACTUAL_TIME + dt(days=1)):
-            print("Sensor {sensor name} with identifier {identifier} triggers an\ "
-                  "alert at {alert datetime} with level {alert level} with last "
-                  "data recorded at {last record datetime}")
-        elif(dt.datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S") > ACTUAL_TIME + dt(hours=2)):
-            print("Sensor {sensor name} with identifier {identifier} triggers an\ "
-                  "alert at {alert datetime} with level {alert level} with last "
-                  "data recorded at {last record datetime}")
+        if(ACTUAL_TIME > datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S") + dt.timedelta(days=2)):
+            print("Sensor "+ i[1]+" with identifier" + str(i[0])+" triggers an "
+                  "alert at "+str(ACTUAL_TIME)+" with level 3 with last "
+                  "data recorded at "+i[3])
+        elif( ACTUAL_TIME > datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S") + dt.timedelta(days=1)):
+            print("Sensor " + i[1] + " with identifier" + str(i[0]) + " triggers an "
+                  "alert at " + str(ACTUAL_TIME) + " with level 2 with last "
+                  "data recorded at " + i[3])
+        elif(ACTUAL_TIME > datetime.strptime(i[3],"%Y-%m-%d %H:%M:%S") + dt.timedelta(hours=2)):
+            print("Sensor " + i[1] + " with identifier" + str(i[0]) + " triggers an "
+                  "alert at " + str(ACTUAL_TIME) + " with level 1 with last "
+                  "data recorded at " + i[3])
 
 
